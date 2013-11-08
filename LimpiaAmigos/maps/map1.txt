@@ -1,13 +1,13 @@
-# Map file for tile-based game
-# (Lines that start with '#' are comments)
-# The tiles are:
-#   (Space) Empty tile
-#   A..Z    Tiles A through Z
-#   o       Star
-#   !       Music Note
-#   *       Goal
-#   1       Bad Guy 1 (grub)
-#   2       Bad Guy 2 (fly)
+# Mapa para nivel 1 de LimpiaAmigos
+# (Lineas que empiezan con ‘#’ son comentarios)
+# Los cuadros son:
+#   (Espacio) Cuadro vacío
+#   A..Z    Cuadros A a la Z
+#   o       Pasta
+#   !       Shampoo
+#   *       Fin del nivel (jabon)
+#   1       Niño malo 1 (flaquito)
+#   2       Niño malo 2 (gordito)
                      
                      
                      
@@ -16,5 +16,5 @@
                      
                      
                  
-            1              1           1            CGAD     *
-ACDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDEBCDEB
+        1      ACDCDB        1        1        ACDB     *
+ACDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDEB
