@@ -306,6 +306,7 @@ public class InputManager implements KeyListener, MouseListener,
     // from the KeyListener interface
     public void keyPressed(KeyEvent e) {
         GameAction gameAction = getKeyAction(e);
+        System.out.println("Se presiono una mamada");
         if (gameAction != null) {
             gameAction.press();
         }

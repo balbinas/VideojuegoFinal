@@ -229,6 +229,7 @@ public class ResourceManager {
             String name = "tile_" + ch + ".png";
             File file = new File("images/" + name);
             if (!file.exists()) {
+                System.out.println(name + " no existio");
                 break;
             }
             tiles.add(loadImage(name));
