@@ -1,4 +1,4 @@
-package com.brackeen.javagamebook.util;
+package com.triton.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

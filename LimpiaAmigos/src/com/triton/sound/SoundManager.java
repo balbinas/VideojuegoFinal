@@ -3,8 +3,8 @@ package com.triton.sound;
 import java.io.*;
 import javax.sound.sampled.*;
 import javax.sound.midi.*;
-import com.brackeen.javagamebook.util.ThreadPool;
-import com.brackeen.javagamebook.util.LoopingByteInputStream;
+import com.triton.util.ThreadPool;
+import com.triton.util.LoopingByteInputStream;
 
 
 /**
