@@ -79,7 +79,6 @@ public class GameAction {
         Signals that the key was pressed.
     */
     public synchronized void press() {
-        System.out.println("Se presiono una madre");
         press(1);
     }
 

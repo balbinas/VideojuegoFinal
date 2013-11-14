@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import com.triton.Graphics.Sprite;
 import com.triton.tilegame.sprites.Creature;
+import com.triton.tilegame.sprites.Shot;
 
 /**
     The TileMapRenderer class draws a TileMap on the screen.
@@ -79,6 +80,7 @@ public class TileMapRenderer {
         int screenWidth, int screenHeight)
     {
         Sprite player = map.getPlayer();
+        Shot bala = map.getBala();
         int mapWidth = tilesToPixels(map.getWidth());
 
         // get the scrolling position of the map
@@ -131,6 +133,9 @@ public class TileMapRenderer {
             Math.round(player.getX()) + offsetX,
             Math.round(player.getY()) + offsetY,
             null);
+        
+        g.setColor(Color.yellow); 
+        g.fillOval(bala.getXPos(), bala.getYPos(), 3, 3); 
 
         // draw sprites
         Iterator i = map.getSprites();

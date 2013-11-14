@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Iterator;
 
 import com.triton.Graphics.Sprite;
+import com.triton.tilegame.sprites.Shot;
 
 /**
     The TileMap class contains the data for a tile-based
@@ -17,6 +18,7 @@ public class TileMap {
     private Image[][] tiles;
     private LinkedList sprites;
     private Sprite player;
+    private Shot bala;
 
     /**
         Creates a new TileMap with the specified width and
@@ -75,7 +77,14 @@ public class TileMap {
     public Sprite getPlayer() {
         return player;
     }
+    
+    public Shot getBala(){
+        return bala;
+    }
 
+    public void setBala(Shot bala){
+        this.bala = bala;
+    }
 
     /**
         Sets the player Sprite.

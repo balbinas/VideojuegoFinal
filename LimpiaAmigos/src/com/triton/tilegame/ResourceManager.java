@@ -4,6 +4,7 @@ import com.triton.tilegame.sprites.Grub;
 import com.triton.tilegame.sprites.Fly;
 import com.triton.tilegame.sprites.Player;
 import com.triton.tilegame.sprites.PowerUp;
+import com.triton.tilegame.sprites.Shot;
 import com.triton.Graphics.Sprite;
 import com.triton.Graphics.Animation;
 import java.awt.*;
@@ -186,7 +187,8 @@ public class ResourceManager {
         player.setX(TileMapRenderer.tilesToPixels(3));
         player.setY(0);
         newMap.setPlayer(player);
-
+        Shot bala = new Shot(10,10);
+        newMap.setBala(bala);
         return newMap;
     }
 
@@ -244,7 +246,7 @@ public class ResourceManager {
 
         // load left-facing images
         images[0] = new Image[] {
-    loadImage("player1.png"),
+            loadImage("player1.png"),
             loadImage("player2.png"),
             loadImage("player3.png"),
             loadImage("fly1.png"),

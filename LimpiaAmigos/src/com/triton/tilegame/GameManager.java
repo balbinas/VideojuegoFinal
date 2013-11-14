@@ -46,6 +46,7 @@ public class GameManager extends GameCore {
     private GameAction moveRight;
     private GameAction jump;
     private GameAction exit;
+    private GameAction shoot;
 
 
     public void init() {
@@ -97,6 +98,7 @@ public class GameManager extends GameCore {
             GameAction.DETECT_INITAL_PRESS_ONLY);
         exit = new GameAction("exit",
             GameAction.DETECT_INITAL_PRESS_ONLY);
+        shoot = new GameAction("shoot", GameAction.DETECT_INITAL_PRESS_ONLY);
 
         inputManager = new InputManager(
             screen.getFullScreenWindow());
@@ -104,8 +106,9 @@ public class GameManager extends GameCore {
 
         inputManager.mapToKey(moveLeft, KeyEvent.VK_LEFT);
         inputManager.mapToKey(moveRight, KeyEvent.VK_RIGHT);
-        inputManager.mapToKey(jump, KeyEvent.VK_SPACE);
+        inputManager.mapToKey(jump, KeyEvent.VK_UP);
         inputManager.mapToKey(exit, KeyEvent.VK_ESCAPE);
+        inputManager.mapToKey(shoot, KeyEvent.VK_SPACE);
     }
 
 
@@ -126,6 +129,9 @@ public class GameManager extends GameCore {
             }
             if (jump.isPressed()) {
                 player.jump(false);
+            }
+            if (shoot.isPressed()) {
+                player.generateShot(map);
             }
             player.setVelocityX(velocityX);
         }

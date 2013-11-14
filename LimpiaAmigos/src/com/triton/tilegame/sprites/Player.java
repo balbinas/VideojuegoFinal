@@ -1,5 +1,6 @@
 package com.triton.tilegame.sprites;
 
+import com.triton.tilegame.TileMap;
 import com.triton.Graphics.Animation;
 
 /**
@@ -56,7 +57,15 @@ public class Player extends Creature {
             setVelocityY(JUMP_SPEED);
         }
     }
-
+    
+    public Shot generateShot(TileMap map) 
+    { 
+        
+    Shot shot = new Shot(super.getX(), super.getY()); 
+    map.setBala(shot);
+    System.out.println("Se genera el shot");
+    return shot; 
+    } 
 
     public float getMaxSpeed() {
         return 0.5f;
