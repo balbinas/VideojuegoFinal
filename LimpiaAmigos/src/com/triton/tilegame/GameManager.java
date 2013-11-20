@@ -70,12 +70,12 @@ public class GameManager extends GameCore {
         // load sounds
         soundManager = new SoundManager(PLAYBACK_FORMAT);
         prizeSound = soundManager.getSound("sounds/prize.wav");
-        boopSound = soundManager.getSound("sounds/boop2.wav");
+        boopSound = soundManager.getSound("sounds/punch.wav");
 
         // start music
         midiPlayer = new MidiPlayer();
         Sequence sequence =
-            midiPlayer.getSequence("sounds/music.midi");
+            midiPlayer.getSequence("sounds/roar.mid");
         midiPlayer.play(sequence, true);
         toggleDrumPlayback();
     }
