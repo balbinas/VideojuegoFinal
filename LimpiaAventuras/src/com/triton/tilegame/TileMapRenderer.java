@@ -134,8 +134,6 @@ public class TileMapRenderer {
             Math.round(player.getY()) + offsetY,
             null);
         
-        g.setColor(Color.yellow); 
-        g.fillOval(bala.getXPos(), bala.getYPos(), 3, 3); 
 
         // draw sprites
         Iterator i = map.getSprites();

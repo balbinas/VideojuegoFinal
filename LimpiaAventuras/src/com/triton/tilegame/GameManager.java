@@ -128,10 +128,10 @@ public class GameManager extends GameCore {
                 velocityX+=player.getMaxSpeed();
             }
             if (jump.isPressed()) {
-                player.jump(false);
+                resourceManager.addBullet(map, (int)player.getX(), (int)player.getY());
             }
             if (shoot.isPressed()) {
-                player.generateShot(map);
+                
             }
             player.setVelocityX(velocityX);
         }

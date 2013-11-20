@@ -28,6 +28,7 @@ public class ResourceManager {
     private GraphicsConfiguration gc;
 
     // host sprites used for cloning
+    private Sprite bulletSprite;
     private Sprite playerSprite;
     private Sprite musicSprite;
     private Sprite coinSprite;
@@ -187,8 +188,7 @@ public class ResourceManager {
         player.setX(TileMapRenderer.tilesToPixels(3));
         player.setY(0);
         newMap.setPlayer(player);
-        Shot bala = new Shot(10,10);
-        newMap.setBala(bala);
+
         return newMap;
     }
 
@@ -215,6 +215,27 @@ public class ResourceManager {
             map.addSprite(sprite);
         }
     }
+    
+        public void addBullet(TileMap map, int tileX, int tileY)
+    {
+            // clone the sprite from the "host"
+            Sprite sprite = (Sprite)bulletSprite.clone();
+
+            // center the sprite
+            sprite.setX(
+                TileMapRenderer.tilesToPixels(tileX) +
+                (TileMapRenderer.tilesToPixels(1) -
+                sprite.getWidth()) / 2);
+
+            // bottom-justify the sprite
+            sprite.setY(
+                TileMapRenderer.tilesToPixels(tileY + 1) -
+                sprite.getHeight());
+
+            // add it to the map
+            map.addSprite(sprite);
+    }
+
 
 
     // -----------------------------------------------------------
@@ -252,14 +273,23 @@ public class ResourceManager {
             loadImage("fly1.png"),
             loadImage("fly2.png"),
             loadImage("fly3.png"),
+            loadImage("grub1.png"),
+            loadImage("grub2.png"),
+            loadImage("bulletA1.png"),
+            loadImage("bulletA2.png"),
+            loadImage("bulletA3.png"),
             loadImage("sucio_01.png"),
             loadImage("sucio_02.png"),
             loadImage("sucio_03.png")
         };
 
+        // right-facing images
         images[1] = new Image[images[0].length];
+        // left-facing "dead" images
         images[2] = new Image[images[0].length];
+        // right-facing "dead" images
         images[3] = new Image[images[0].length];
+        
         for (int i=0; i<images[0].length; i++) {
             // right-facing images
             images[1][i] = getMirrorImage(images[0][i]);
@@ -273,6 +303,8 @@ public class ResourceManager {
         Animation[] playerAnim = new Animation[4];
         Animation[] flyAnim = new Animation[4];
         Animation[] grubAnim = new Animation[4];
+        Animation[] bulletAnim = new Animation[4];
+        
         for (int i=0; i<4; i++) {
             playerAnim[i] = createPlayerAnim(
                 images[i][0], images[i][1], images[i][2]);
@@ -280,6 +312,7 @@ public class ResourceManager {
                 images[i][3], images[i][4], images[i][5]);
             grubAnim[i] = createGrubAnim(
                 images[i][6], images[i][7]);
+            bulletAnim[i] = createBulletAnim(images[i][8],images[i][9],images[i][10]);
         }
 
         // create creature sprites
@@ -289,9 +322,21 @@ public class ResourceManager {
             flyAnim[2], flyAnim[3]);
         grubSprite = new Grub(grubAnim[0], grubAnim[1],
             grubAnim[2], grubAnim[3]);
+        bulletSprite = new Shot(bulletAnim[0],bulletAnim[1],
+        bulletAnim[2],bulletAnim[3]);
+        
+        
     }
 
 
+    private Animation createBulletAnim(Image bullet1, Image bullet2, Image bullet3)
+    {
+        Animation anim = new Animation();
+        anim.addFrame(bullet1, 50);
+        anim.addFrame(bullet2, 50);
+        anim.addFrame(bullet3, 50);
+        return anim;
+    }
     private Animation createPlayerAnim(Image player1,
         Image player2, Image player3)
     {
