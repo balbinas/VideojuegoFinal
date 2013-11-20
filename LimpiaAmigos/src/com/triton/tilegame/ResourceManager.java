@@ -252,8 +252,9 @@ public class ResourceManager {
             loadImage("fly1.png"),
             loadImage("fly2.png"),
             loadImage("fly3.png"),
-            loadImage("grub1.png"),
-            loadImage("grub2.png"),
+            loadImage("sucio_01.png"),
+            loadImage("sucio_02.png"),
+            loadImage("sucio_03.png")
         };
 
         images[1] = new Image[images[0].length];

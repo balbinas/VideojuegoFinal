@@ -82,7 +82,7 @@ public class GameManager extends GameCore {
 
 
     /**
-        Closes any resurces used by the GameManager.
+        Closes any resources used by the GameManager.
     */
     public void stop() {
         super.stop();
