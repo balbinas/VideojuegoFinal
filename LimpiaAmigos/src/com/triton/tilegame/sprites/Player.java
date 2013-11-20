@@ -58,13 +58,13 @@ public class Player extends Creature {
         }
     }
     
-    public Shot generateShot(TileMap map) 
+    public void generateShot(TileMap map) 
     { 
         
-    Shot shot = new Shot(super.getX(), super.getY()); 
-    map.setBala(shot);
-    System.out.println("Se genera el shot");
-    return shot; 
+    //Shot shot = new Shot(super.getX(), super.getY()); 
+    //map.setBala(shot);
+    //System.out.println("Se genera el shot");
+    //return shot; 
     } 
 
     public float getMaxSpeed() {

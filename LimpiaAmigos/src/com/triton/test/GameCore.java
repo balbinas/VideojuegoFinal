@@ -86,8 +86,8 @@ public abstract class GameCore {
         screen.setFullScreen(displayMode);
         Window window = screen.getFullScreenWindow();
         
-        //window.setVisible(false);
-        //window.setVisible(true);
+        window.setVisible(false);
+        window.setVisible(true);
         window.setFont(new Font("Dialog", Font.PLAIN, FONT_SIZE));
         window.setBackground(Color.blue);
         window.setForeground(Color.white);
