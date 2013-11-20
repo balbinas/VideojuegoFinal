@@ -28,7 +28,7 @@ public class ResourceManager {
     private GraphicsConfiguration gc;
 
     // host sprites used for cloning
-    private Sprite bulletSprite;
+    public Sprite bulletSprite;
     private Sprite playerSprite;
     private Sprite musicSprite;
     private Sprite coinSprite;
@@ -218,19 +218,15 @@ public class ResourceManager {
     
         public void addBullet(TileMap map, int tileX, int tileY)
     {
+            
             // clone the sprite from the "host"
             Sprite sprite = (Sprite)bulletSprite.clone();
 
             // center the sprite
-            sprite.setX(
-                TileMapRenderer.tilesToPixels(tileX) +
-                (TileMapRenderer.tilesToPixels(1) -
-                sprite.getWidth()) / 2);
+            sprite.setX(tileX + 80);
 
             // bottom-justify the sprite
-            sprite.setY(
-                TileMapRenderer.tilesToPixels(tileY + 1) -
-                sprite.getHeight());
+            sprite.setY(tileY + 20);
 
             // add it to the map
             map.addSprite(sprite);

@@ -18,7 +18,7 @@ public class TileMap {
     private Image[][] tiles;
     private LinkedList sprites;
     private Sprite player;
-    private Shot bala;
+    private Sprite bala;
 
     /**
         Creates a new TileMap with the specified width and
@@ -78,11 +78,11 @@ public class TileMap {
         return player;
     }
     
-    public Shot getBala(){
+    public Sprite getBala(){
         return bala;
     }
 
-    public void setBala(Shot bala){
+    public void setBala(Sprite bala){
         this.bala = bala;
     }
 

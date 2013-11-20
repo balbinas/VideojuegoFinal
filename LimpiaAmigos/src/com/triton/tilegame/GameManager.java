@@ -70,7 +70,7 @@ public class GameManager extends GameCore {
         // load sounds
         soundManager = new SoundManager(PLAYBACK_FORMAT);
         prizeSound = soundManager.getSound("sounds/prize.wav");
-        boopSound = soundManager.getSound("sounds/punch.wav");
+        boopSound = soundManager.getSound("sounds/prize.wav");
 
         // start music
         midiPlayer = new MidiPlayer();
@@ -128,10 +128,10 @@ public class GameManager extends GameCore {
                 velocityX+=player.getMaxSpeed();
             }
             if (jump.isPressed()) {
-                resourceManager.addBullet(map, (int)player.getX(), (int)player.getY());
+                player.jump(true);
             }
             if (shoot.isPressed()) {
-                
+                resourceManager.addBullet(map, (int)player.getX(), (int)player.getY());
             }
             player.setVelocityX(velocityX);
         }
@@ -265,7 +265,6 @@ public class GameManager extends GameCore {
     public void update(long elapsedTime) {
         Creature player = (Creature)map.getPlayer();
 
-
         // player is dead! start map over
         if (player.getState() == Creature.STATE_DEAD) {
             map = resourceManager.reloadMap();
@@ -278,6 +277,7 @@ public class GameManager extends GameCore {
         // update player
         updateCreature(player, elapsedTime);
         player.update(elapsedTime);
+        
 
         // update other sprites
         Iterator i = map.getSprites();

@@ -80,7 +80,6 @@ public class TileMapRenderer {
         int screenWidth, int screenHeight)
     {
         Sprite player = map.getPlayer();
-        Shot bala = map.getBala();
         int mapWidth = tilesToPixels(map.getWidth());
 
         // get the scrolling position of the map
