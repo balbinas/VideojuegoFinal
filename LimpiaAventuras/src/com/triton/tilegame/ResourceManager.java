@@ -269,14 +269,13 @@ public class ResourceManager {
             loadImage("fly1.png"),
             loadImage("fly2.png"),
             loadImage("fly3.png"),
-            loadImage("grub1.png"),
-            loadImage("grub2.png"),
-            loadImage("bulletA1.png"),
-            loadImage("bulletA2.png"),
-            loadImage("bulletA3.png"),
             loadImage("sucio_01.png"),
             loadImage("sucio_02.png"),
-            loadImage("sucio_03.png")
+            loadImage("sucio_03.png"),
+            loadImage("powerup1.png"),
+            loadImage("powerup2.png"),
+            loadImage("powerup3.png")
+            
         };
 
         // right-facing images
@@ -307,8 +306,8 @@ public class ResourceManager {
             flyAnim[i] = createFlyAnim(
                 images[i][3], images[i][4], images[i][5]);
             grubAnim[i] = createGrubAnim(
-                images[i][6], images[i][7]);
-            bulletAnim[i] = createBulletAnim(images[i][8],images[i][9],images[i][10]);
+                images[i][6], images[i][7], images[i][8]);
+            bulletAnim[i] = createBulletAnim(images[i][9],images[i][10],images[i][11]);
         }
 
         // create creature sprites
@@ -359,10 +358,11 @@ public class ResourceManager {
     }
 
 
-    private Animation createGrubAnim(Image img1, Image img2) {
+    private Animation createGrubAnim(Image img1, Image img2, Image img3) {
         Animation anim = new Animation();
         anim.addFrame(img1, 250);
         anim.addFrame(img2, 250);
+        anim.addFrame(img3,250);
         return anim;
     }
 
