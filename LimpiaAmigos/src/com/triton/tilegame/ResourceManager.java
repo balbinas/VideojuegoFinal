@@ -277,7 +277,10 @@ public class ResourceManager {
             loadImage("grub2.png"),
             loadImage("bulletA1.png"),
             loadImage("bulletA2.png"),
-            loadImage("bulletA3.png")
+            loadImage("bulletA3.png"),
+            loadImage("sucio_01.png"),
+            loadImage("sucio_02.png"),
+            loadImage("sucio_03.png")
         };
 
         // right-facing images
