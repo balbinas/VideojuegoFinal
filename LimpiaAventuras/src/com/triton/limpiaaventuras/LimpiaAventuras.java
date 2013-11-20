@@ -1,11 +1,11 @@
-package com.triton.limpiaamigos;
+package com.triton.limpiaaventuras;
 
 
 import java.awt.*;
 import javax.swing.ImageIcon;
 import com.triton.tilegame.*;
 
-public class LimpiaAmigos extends GameManager {
+public class LimpiaAventuras extends GameManager {
 
     /**
      * @param args the command line arguments
