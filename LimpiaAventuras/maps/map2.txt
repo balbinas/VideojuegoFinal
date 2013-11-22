@@ -8,14 +8,14 @@
 #   *       Goal
 #   1       Bad Guy 1 (grub)
 #   2       Bad Guy 2 (fly)
-BF          o o o                o o o o o o o o o o o o o o o o o o o o o o o                EB
-AD         IIIIIII              IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII               KL
-KL                      o o o                I                   EBBBBBBBBBBBBBF     o o o o  KL
-KL                     IIIIIII               I                   CAAAAAAAAAAAAAD    o o o o o KL
-KL                                           I             o o   CAAAAAAAAAAAAAHF    o o o o  KL
-KL                    2   !        2                      PRSTQ  CAAAAAAAAAAAAAAD   o o o o o KL
-KL                      PRSTQ                                    CAAAAAAAAAAAAAAHF   IIIIIII  KL
-KL         KOL                          1    1  1        2       CAAAAAAAAAAAAAAAD  o o o o o KL
-KL                            1      PRTSTSRTSRSTQ               CAAAAAAAAAAAAAAAHF  o o o o  KL
-KL      1       KMMMMNNNNMMOOMNML     o o o o o o              * KAAAAAAAAAAAAAAAAL o o o o o KL
+KL          o o o                o o o o o o o o o o o o o o o o o o o o o o o                KL
+KL         KLRSTRST                                                                           KL
+KL                      o o o                KL                                       o o o o  KL
+KL                     KRSTRTL               KL                                      o o o o o KL
+KL                                           KL             o o   KRSSTRSTRSTRTSTRSL  o o o o  KL
+KL                    2   !        2                      PRSTQ  KSRTSRTSTRSTRTSRTL o o o o o KL
+KL                      PRSTQ                                    KRSTRSTRSTRSTRTSRL  KMNONML  KL
+KL         KOL                          1    1  1        2       KSRTSRTSTRSTRSTRSL o o o o o KL
+KL                            1      PRTSTSRTSRSTQ               KRSTSRTSRTSTRSRTSL  o o o o  KL
+KL      1       KMMMMNNNNMMOOMNML     o o o o o o              * KMNOMNONOMNOMNOMNL o o o o o KL
 KMNOMNOMNOMNOMNOMNONMONMONMONMNOMNOMNONMONMNOMNONMONMNOMNOMNONMONMNOMNOMNOMNONMNOMNONMNOMNOMNNOL
