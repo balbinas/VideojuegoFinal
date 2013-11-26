@@ -317,8 +317,8 @@ public class ResourceManager {
             flyAnim[2], flyAnim[3]);
         grubSprite = new Grub(grubAnim[0], grubAnim[1],
             grubAnim[2], grubAnim[3]);
-        bulletSprite = new Shot(bulletAnim[0],bulletAnim[1],
-        bulletAnim[2],bulletAnim[3]);
+        //bulletSprite = new Shot(bulletAnim[0],bulletAnim[1],
+        //bulletAnim[2],bulletAnim[3]);
         
         
     }
@@ -371,28 +371,16 @@ public class ResourceManager {
         // create "goal" sprite
         Animation anim = new Animation();
         anim.addFrame(loadImage("Items-02.png"), 150);
-        //anim.addFrame(loadImage("heart1.png"), 150);
-        //anim.addFrame(loadImage("heart2.png"), 150);
-        //anim.addFrame(loadImage("heart3.png"), 150);
-        //anim.addFrame(loadImage("heart2.png"), 150);
         goalSprite = new PowerUp.Goal(anim);
 
         // create "pasta de dientes" sprite
         anim = new Animation();
         anim.addFrame(loadImage("Items-01.png"), 100);
-        /*anim.addFrame(loadImage("star1.png"), 100);
-        anim.addFrame(loadImage("star2.png"), 100);
-        anim.addFrame(loadImage("star3.png"), 100);
-        anim.addFrame(loadImage("star4.png"), 100);*/
         coinSprite = new PowerUp.Star(anim);
 
         // create "soap" sprite
         anim = new Animation();
         anim.addFrame(loadImage("Items-03.png"), 150);
-        /*anim.addFrame(loadImage("music1.png"), 150);
-        anim.addFrame(loadImage("music2.png"), 150);
-        anim.addFrame(loadImage("music3.png"), 150);
-        anim.addFrame(loadImage("music2.png"), 150);*/
         musicSprite = new PowerUp.Music(anim);
     }
 

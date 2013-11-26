@@ -4,6 +4,7 @@ import com.triton.Graphics.Sprite;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Iterator;
+import java.util.*;
 
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
@@ -14,11 +15,24 @@ import com.triton.sound.*;
 import com.triton.input.*;
 import com.triton.test.*; //Aqui era el test antes
 import com.triton.tilegame.sprites.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
+import java.util.LinkedList;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
     GameManager manages all parts of the game.
 */
-public class GameManager extends GameCore {
+public class GameManager extends GameCore implements Runnable, MouseListener, MouseMotionListener{
 
     public static void main(String[] args) {
         new GameManager().run();
@@ -47,6 +61,34 @@ public class GameManager extends GameCore {
     private GameAction jump;
     private GameAction exit;
     private GameAction shoot;
+    private GameAction pause;
+    private GameAction instructions;
+    private GameAction credits;
+    private GameAction sound;
+    
+    public static int lives;
+    public static int score;
+    
+    public static Image iIntro;
+    public static Image iIntro2;
+    public static Image iMenu;
+    public static Image iInstr;
+    public static Image iCredits;
+    public static Image iBoy;
+    public static Image iGirl;
+    public static Image iLevel;
+    public static Image iLoose;
+    public static Image iWin;
+    
+    private boolean introff;
+    private boolean menuoff;
+    private boolean instroff;
+    private boolean creditoff;
+    //private boolean 
+    
+    private boolean pausoff;
+    private boolean sonidoff;
+    private boolean scoring;
 
 
     public void init() {
@@ -78,6 +120,40 @@ public class GameManager extends GameCore {
             midiPlayer.getSequence("sounds/roar.mid");
         midiPlayer.play(sequence, true);
         toggleDrumPlayback();
+        
+        lives = 3;
+        score = 0;
+        
+        
+        /*
+        iGameOver = ResourceManager.loadImage("gameover.png");
+        iLives = ResourceManager.loadImage("toothbrush.png");
+        
+        
+        iIntro = ResourceManager.loadImage("intro1.png");
+        iIntro = ResourceManager.loadImage("intro2.png");
+        iMenu = ResourceManager.loadImage("menu.png");
+        iPause = ResourceManager.loadImage("pause.png");
+        iInstr = ResourceManager.loadImage("instr.png");
+        iCredits = ResourceManager.loadImage("credits.png");
+        iBoy = ResourceManager.loadImage("chooseboy.png");
+        iGirl = ResourceManager.loadImage("choosegirl.png");
+        iLevel = ResourceManager.loadImage("levelcomplete.png");
+        //iLoose = ResourceManager.loadImage("youloose.png");
+        iWin = ResourceManager.loadImage("youwin.png");
+        */
+        
+        introff = true;
+        menuoff = false;
+        instroff = false;
+        creditoff = false;
+        pausoff = false;
+        sonidoff = true;
+        
+        //fileName = "scores.txt";
+        //scorelist = new LinkedList<Integer>();
+        scoring = false;
+       
     }
 
 
@@ -99,6 +175,10 @@ public class GameManager extends GameCore {
         exit = new GameAction("exit",
             GameAction.DETECT_INITAL_PRESS_ONLY);
         shoot = new GameAction("shoot", GameAction.DETECT_INITAL_PRESS_ONLY);
+        pause = new GameAction("pause", GameAction.DETECT_INITAL_PRESS_ONLY);
+        credits = new GameAction("credits", GameAction.DETECT_INITAL_PRESS_ONLY);
+        instructions = new GameAction("instructions", GameAction.DETECT_INITAL_PRESS_ONLY);
+        sound = new GameAction("sound", GameAction.DETECT_INITAL_PRESS_ONLY);
 
         inputManager = new InputManager(
             screen.getFullScreenWindow());
@@ -109,6 +189,10 @@ public class GameManager extends GameCore {
         inputManager.mapToKey(jump, KeyEvent.VK_UP);
         inputManager.mapToKey(exit, KeyEvent.VK_ESCAPE);
         inputManager.mapToKey(shoot, KeyEvent.VK_SPACE);
+        inputManager.mapToKey(pause, KeyEvent.VK_P);
+        inputManager.mapToKey(instructions, KeyEvent.VK_I);
+        inputManager.mapToKey(credits, KeyEvent.VK_C);
+        inputManager.mapToKey(sound, KeyEvent.VK_S);
     }
 
 
@@ -130,13 +214,55 @@ public class GameManager extends GameCore {
             if (jump.isPressed()) {
                 player.jump(true);
             }
-            if (shoot.isPressed()) {
-                resourceManager.addBullet(map, (int)player.getX(), (int)player.getY());
-            }
+           
             player.setVelocityX(velocityX);
+            
+            /*if(player.getStanding()==0){
+                bulletAnim = ResourceManager.bulletAnimationLeft();
+            }else{
+                bulletAnim = ResourceManager.bulletAnimationRight();
+            }
+                                   
+            if(fire.isPressed() && !pausoff){
+                if(player.isFiring()){
+                    long elapsed = (System.nanoTime() - player.getBulletTimer())/1000000;
+                    if(elapsed > player.getBulletDelay()&&municiones>0){
+                        municiones--;
+                        bullets.add(new Bullet(bulletAnim, angle,
+                                player.getX()+bulletOffset,
+                                player.getY()+player.getHeight()/2-16));
+                        map.addSprite(bullets.get(bullets.size()-1));
+                        player.setBulletTimer(System.nanoTime());
+                    }
+                }
+                player.shoot(true);
+            }
+            */
+            if(pause.isPressed()){
+                pausoff = !pausoff;
+                midiPlayer.setPaused(pausoff);
+            }
+            
+            if (lives<=0) {
+                    //restartGame();
+                }
+            }
+            
+            if (instructions.isPressed()) {
+                instroff = !instroff;
+            }
+            
+            if (credits.isPressed()) {
+                creditoff = !creditoff;
+            }
+            
+            if (sound.isPressed()) {
+                sonidoff = !sonidoff;
+                midiPlayer.setPaused(sonidoff);
+            }
         }
 
-    }
+    
 
 
     public void draw(Graphics2D g) {
@@ -398,6 +524,12 @@ public class GameManager extends GameCore {
                 player.setState(Creature.STATE_DYING);
             }
         }
+        else if (collisionSprite instanceof Shot) {
+            Shot bala = (Shot)collisionSprite;
+           // bala.setState(bala.STATE_NORMAL);
+            
+            player.setState(Creature.STATE_NORMAL);
+        }
     }
 
 
@@ -424,6 +556,41 @@ public class GameManager extends GameCore {
                 new EchoFilter(2000, .7f), false);
             map = resourceManager.loadNextMap();
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent me) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
