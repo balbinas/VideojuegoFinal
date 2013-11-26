@@ -11,11 +11,17 @@ public class Player extends Creature {
     private static final float JUMP_SPEED = -.95f;
 
     private boolean onGround;
+    private boolean firing;
+    private long bulletTimer;
+    private long bulletDelay;
 
     public Player(Animation left, Animation right,
         Animation deadLeft, Animation deadRight)
     {
         super(left, right, deadLeft, deadRight);
+        firing = false;
+        bulletTimer = System.nanoTime();
+        bulletDelay = 500;
     }
 
 
@@ -58,17 +64,43 @@ public class Player extends Creature {
         }
     }
     
-    public void generateShot(TileMap map) 
-    { 
-        
-    //Shot shot = new Shot(super.getX(), super.getY()); 
-    //map.setBala(shot);
-    //System.out.println("Se genera el shot");
-    //return shot; 
-    } 
-
     public float getMaxSpeed() {
         return 0.5f;
+    }
+    
+     public void setBulletTimer(long timer){
+        this.bulletTimer = timer;
+    }
+    /**
+     * Get bullet Timer
+     * @return bullet timer
+     */
+    public long getBulletTimer(){
+        return this.bulletTimer;
+    }
+    
+    /**
+     * Get bullet Delay
+     * @return bullet timer
+     */
+    public long getBulletDelay(){
+        return this.bulletDelay;
+    }
+    
+    /**
+     * Is player firing?
+     * @return firing
+     */
+    public boolean isFiring(){
+        return this.firing;
+    }
+    
+    /**
+     * Makes the player fire 
+     * @param fire 
+     */
+    public void fire(boolean fire) {
+        this.firing = fire;
     }
 
 }

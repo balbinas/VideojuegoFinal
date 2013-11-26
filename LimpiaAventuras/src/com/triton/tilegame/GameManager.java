@@ -9,11 +9,13 @@ import java.util.*;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 import javax.sound.sampled.AudioFormat;
+import com.triton.tilegame.sprites.Bullet;
 
 import com.triton.Graphics.*;
 import com.triton.sound.*;
 import com.triton.input.*;
-import com.triton.test.*; //Aqui era el test antes
+import com.triton.test.GameCore;
+import static com.triton.test.GameCore.screen; //Aqui era el test antes
 import com.triton.tilegame.sprites.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -65,6 +67,10 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
     private GameAction instructions;
     private GameAction credits;
     private GameAction sound;
+    public static ArrayList<Bullet> bullets;
+    private int angle;
+    private int bulletOffset;
+    private Animation bulletAnim;
     
     public static int lives;
     public static int score;
@@ -108,6 +114,7 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
 
         // load first map
         map = resourceManager.loadNextMap();
+        bullets = new ArrayList<Bullet>();
 
         // load sounds
         soundManager = new SoundManager(PLAYBACK_FORMAT);
@@ -207,9 +214,15 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
             float velocityX = 0;
             if (moveLeft.isPressed()) {
                 velocityX-=player.getMaxSpeed();
+                
+                angle=180;
+                bulletOffset=0;
             }
             if (moveRight.isPressed()) {
                 velocityX+=player.getMaxSpeed();
+                
+                angle=0;
+                bulletOffset=player.getWidth()/2;
             }
             if (jump.isPressed()) {
                 player.jump(true);
@@ -217,27 +230,28 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
            
             player.setVelocityX(velocityX);
             
-            /*if(player.getStanding()==0){
+            if(player.getStanding()==0){
                 bulletAnim = ResourceManager.bulletAnimationLeft();
             }else{
                 bulletAnim = ResourceManager.bulletAnimationRight();
             }
                                    
-            if(fire.isPressed() && !pausoff){
+            if(shoot.isPressed() && !pausoff){
                 if(player.isFiring()){
                     long elapsed = (System.nanoTime() - player.getBulletTimer())/1000000;
-                    if(elapsed > player.getBulletDelay()&&municiones>0){
-                        municiones--;
+                    if(elapsed > player.getBulletDelay()){
                         bullets.add(new Bullet(bulletAnim, angle,
                                 player.getX()+bulletOffset,
-                                player.getY()+player.getHeight()/2-16));
+                                player.getY()+player.getHeight()/2-16) {});
                         map.addSprite(bullets.get(bullets.size()-1));
                         player.setBulletTimer(System.nanoTime());
                     }
                 }
-                player.shoot(true);
+                player.fire(true);
             }
-            */
+            
+            
+            
             if(pause.isPressed()){
                 pausoff = !pausoff;
                 midiPlayer.setPaused(pausoff);
@@ -421,8 +435,36 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
             // normal update
             sprite.update(elapsedTime);
         }
+        for(int j = 0; j < bullets.size(); j++){
+                boolean remove = bullets.get(j).updateBullet(elapsedTime);
+                if(remove){
+                    map.removeSprite(bullets.get(j));
+                    bullets.remove(j);
+                    j--;
+                } 
+            }
+                    checkBulletCollision();
+
     }
 
+        /**
+     * Checks for Grub collision with bullets. Bullets kill grub.
+     * 
+     * @param grub Grub
+     * @param bullet Bullet
+     */
+    public void checkBulletCollision()
+    {
+        for(int i = 0; i<bullets.size(); i++){
+            Sprite collisionSprite = getSpriteCollision(bullets.get(i));
+            if(collisionSprite instanceof Creature || collisionSprite instanceof Fly){
+                Creature badguy = (Creature)collisionSprite;
+                map.removeSprite(badguy);
+                map.removeSprite(bullets.get(i));
+                bullets.remove(i);
+            }
+        }
+    }
 
     /**
         Updates the creature, applying gravity for creatures that

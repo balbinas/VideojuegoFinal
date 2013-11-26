@@ -27,6 +27,8 @@ public abstract class Creature extends Sprite {
     private Animation deadRight;
     private int state;
     private long stateTime;
+        private int standing;
+
 
     /**
         Creates a new Creature with the specified Animations.
@@ -40,6 +42,10 @@ public abstract class Creature extends Sprite {
         this.deadLeft = deadLeft;
         this.deadRight = deadRight;
         state = STATE_NORMAL;
+    }
+
+     public int getStanding(){
+        return standing;
     }
 
 

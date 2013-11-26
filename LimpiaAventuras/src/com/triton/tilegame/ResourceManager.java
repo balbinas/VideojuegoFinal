@@ -25,7 +25,7 @@ public class ResourceManager {
 
     private ArrayList tiles;
     private int currentMap;
-    private GraphicsConfiguration gc;
+    private static GraphicsConfiguration gc;
 
     // host sprites used for cloning
     public Sprite bulletSprite;
@@ -51,13 +51,13 @@ public class ResourceManager {
     /**
         Gets an image from the images/ directory.
     */
-    public Image loadImage(String name) {
+    public static Image loadImage(String name) {
         String filename = "images/" + name;
         return new ImageIcon(filename).getImage();
     }
 
 
-    public Image getMirrorImage(Image image) {
+    public static Image getMirrorImage(Image image) {
         return getScaledImage(image, -1, 1);
     }
 
@@ -67,7 +67,7 @@ public class ResourceManager {
     }
 
 
-    private Image getScaledImage(Image image, float x, float y) {
+    private static Image getScaledImage(Image image, float x, float y) {
 
         // set up the transform
         AffineTransform transform = new AffineTransform();
@@ -332,6 +332,26 @@ public class ResourceManager {
         anim.addFrame(bullet3, 50);
         return anim;
     }
+    
+      public static Animation bulletAnimationLeft(){
+        Animation anim = new Animation();
+        
+        anim.addFrame(loadImage("bullet1.png"), 50);
+        anim.addFrame(loadImage("bullet2.png"), 50);
+        anim.addFrame(loadImage("bullet3.png"), 50);
+        
+        return anim;
+    }
+    public static Animation bulletAnimationRight(){
+        Animation anim = new Animation();
+        
+        anim.addFrame(getMirrorImage(loadImage("bullet1.png")), 50);
+        anim.addFrame(getMirrorImage(loadImage("bullet2.png")), 50);
+        anim.addFrame(getMirrorImage(loadImage("bullet3.png")), 50);
+        
+        return anim;
+    }
+    
     private Animation createPlayerAnim(Image player1,
         Image player2, Image player3)
     {
