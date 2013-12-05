@@ -95,7 +95,6 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
     private boolean instroff;
     private boolean creditoff;
     //private boolean 
-    
     private boolean pausoff;
     private boolean sonidoff;
     private boolean scoring;
@@ -117,28 +116,22 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
 
     public void init() {
         super.init();
-
         // set up input manager
         initInput();
-
         // start resource manager
         resourceManager = new ResourceManager(
         screen.getFullScreenWindow().getGraphicsConfiguration());
-
         // load resources
         renderer = new TileMapRenderer();
         renderer.setBackground(
             resourceManager.loadImage("background.png"));
-
         // load first map
         map = resourceManager.loadNextMap();
         bullets = new ArrayList<Bullet>();
-
         // load sounds
         soundManager = new SoundManager(PLAYBACK_FORMAT);
         prizeSound = soundManager.getSound("sounds/prize.wav");
         boopSound = soundManager.getSound("sounds/prize.wav");
-
         // start music
         midiPlayer = new MidiPlayer();
         Sequence sequence =
@@ -285,17 +278,19 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
             }
                                    
             if(shoot.isPressed() &&!bPause){
-                if(player.isFiring()){
-                    long elapsed = (System.nanoTime() - player.getBulletTimer())/1000000;
-                    if(elapsed > player.getBulletDelay()){
+                
+                       System.out.println(bullets.size());
+
                         bullets.add(new Bullet(bulletAnim, angle,
                                 player.getX()+bulletOffset,
                                 player.getY()+player.getHeight()/2-16) {});
+                        
+                        System.out.println(bullets.size());
+
                         map.addSprite(bullets.get(bullets.size()-1));
+                        
+                        
                         player.setBulletTimer(System.nanoTime());
-                    }
-                }
-                player.fire(true);
             }
             
             
@@ -359,6 +354,15 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
 
     public void draw(Graphics2D g) {
         Window window = ScreenManager.device.getFullScreenWindow();
+        Font font;
+        try{
+        font = ResourceManager.getFont();
+        font = font.deriveFont(24f);
+        g.setFont(font);
+        }catch (FontFormatException ex) {
+        } catch (IOException ex) {
+        }
+        
 
         if (bIntro && introCounter > 0){
             g.drawImage(iIntro, 0, 0,
@@ -380,7 +384,7 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
             
 
                 
-               // g.drawString("Puntaje: " + score, 5, 60);
+               g.drawString("Puntaje: " + score, 5, 60);
                // g.drawString("Municiones: " + municiones, 5, 90);
             } else {
                 g.drawImage(iPause, 0, 0,
@@ -556,36 +560,19 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
             // normal update
             sprite.update(elapsedTime);
         }
+        
         for(int j = 0; j < bullets.size(); j++){
                 boolean remove = bullets.get(j).updateBullet(elapsedTime);
-                if(remove){
-                    map.removeSprite(bullets.get(j));
-                    bullets.remove(j);
-                    j--;
-                } 
+                //if(remove){
+                    //map.removeSprite(bullets.get(j));
+                    //bullets.remove(j);
+                  //  j--;
+                //} 
             }
                     checkBulletCollision();
 
     }
 
-        /**
-     * Checks for Grub collision with bullets. Bullets kill grub.
-     * 
-     * @param grub Grub
-     * @param bullet Bullet
-     */
-    public void checkBulletCollision()
-    {
-        for(int i = 0; i<bullets.size(); i++){
-            Sprite collisionSprite = getSpriteCollision(bullets.get(i));
-            if(collisionSprite instanceof Creature || collisionSprite instanceof Fly){
-                Creature badguy = (Creature)collisionSprite;
-                map.removeSprite(badguy);
-                map.removeSprite(bullets.get(i));
-                bullets.remove(i);
-            }
-        }
-    }
 
     /**
         Updates the creature, applying gravity for creatures that
@@ -681,6 +668,8 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
                 badguy.setState(Creature.STATE_DYING);
                 player.setY(badguy.getY() - player.getHeight());
                 player.jump(true);
+                
+                score+=100;
             }
             else {
                 // player dies!
@@ -695,6 +684,25 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
         }
     }
 
+         /**
+     * Checks for Grub collision with bullets. Bullets kill grub.
+     * 
+     * @param grub Grub
+     * @param bullet Bullet
+     */
+    public void checkBulletCollision()
+    {
+        for(int i = 0; i<bullets.size(); i++){
+            Sprite collisionSprite = getSpriteCollision(bullets.get(i));
+            if(collisionSprite instanceof Creature || collisionSprite instanceof Fly){
+                Creature badguy = (Creature)collisionSprite;
+                map.removeSprite(badguy);
+                map.removeSprite(bullets.get(i));
+                bullets.remove(i);
+                score+=100;
+            }
+        }
+    }
 
     /**
         Gives the player the speicifed power up and removes it
@@ -704,20 +712,26 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
         // remove it from the map
         map.removeSprite(powerUp);
 
+        //Paste de Dientes
         if (powerUp instanceof PowerUp.Star) {
             // do something here, like give the player points
             soundManager.play(prizeSound);
+            score+=100;
         }
+        //Shampoo
         else if (powerUp instanceof PowerUp.Music) {
             // change the music
             soundManager.play(prizeSound);
             toggleDrumPlayback();
+           score+=100;
         }
+        //Goal
         else if (powerUp instanceof PowerUp.Goal) {
             // advance to next map
             soundManager.play(prizeSound,
                 new EchoFilter(2000, .7f), false);
             map = resourceManager.loadNextMap();
+            score+=500;
         }
     }
 

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 import com.triton.Graphics.*;
+import java.net.URL;
 
 
 /**
@@ -65,6 +66,12 @@ public class ResourceManager {
     public Image getFlippedImage(Image image) {
         return getScaledImage(image, 1, -1);
     }
+    
+        public static Font getFont() throws FontFormatException, IOException{
+        URL urlFont = ResourceManager.class.getResource("/fonts/gotham.ttf");
+        Font font = Font.createFont(Font.TRUETYPE_FONT, urlFont.openStream());
+        return font;
+        }
 
 
     private static Image getScaledImage(Image image, float x, float y) {
@@ -413,7 +420,7 @@ public class ResourceManager {
         anim.addFrame(loadImage("Items-01.png"), 100);
         coinSprite = new PowerUp.Star(anim);
 
-        // create "soap" sprite
+        // create "shamppo" sprite
         anim = new Animation();
         anim.addFrame(loadImage("Items-03.png"), 150);
         musicSprite = new PowerUp.Music(anim);
