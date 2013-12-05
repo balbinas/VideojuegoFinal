@@ -6,15 +6,15 @@
 #   o       Pasta
 #   !       Shampoo
 #   *       Fin del nivel (jabon)
-#   1       Niño malo 1 (flaquito)
-#   2       Niño malo 2 (gordito)
+#   1       Alien malo 1
+#   2       Alien malo 2
                      
                      
-                     				       *
-    !                 	       o                      FIG
-   FHIJG                                      o
-                                      !     FHIJHG
-               o     FHG       FJIG
-                 
+                                                            *
+    !                                                       FIG
+   FHIG           FG                 FG           o
+            FG                               FHIJHG
+                     FHG       FJIG                      FG
+              o   
   1       ACDCDB        1    !    1         o      ACDB   o  
 ACDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDEB

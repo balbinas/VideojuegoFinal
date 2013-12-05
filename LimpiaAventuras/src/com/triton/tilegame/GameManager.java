@@ -67,6 +67,8 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
     private GameAction instructions;
     private GameAction credits;
     private GameAction sound;
+    private GameAction restart;
+    private int introCounter;
     public static ArrayList<Bullet> bullets;
     private int angle;
     private int bulletOffset;
@@ -81,6 +83,8 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
     public static Image iInstr;
     public static Image iCredits;
     public static Image iBoy;
+    public static Image iPause;
+    public static Image iGameOver;
     public static Image iGirl;
     public static Image iLevel;
     public static Image iLoose;
@@ -95,6 +99,20 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
     private boolean pausoff;
     private boolean sonidoff;
     private boolean scoring;
+    
+        private boolean bIntro;
+    private boolean bMenu;
+    private boolean bInstr;
+    private boolean bCredits;
+    public static boolean bBoy;
+    private boolean bGirl;
+    private boolean bLevel;
+    private boolean bLoose;
+    private boolean bWin;
+    private boolean bPlayer;
+    
+    private boolean bPause;
+    private boolean bSound;
 
 
     public void init() {
@@ -132,23 +150,21 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
         score = 0;
         
         
-        /*
-        iGameOver = ResourceManager.loadImage("gameover.png");
-        iLives = ResourceManager.loadImage("toothbrush.png");
         
+        iGameOver = ResourceManager.loadImage("screen_gameover.png");
         
-        iIntro = ResourceManager.loadImage("intro1.png");
-        iIntro = ResourceManager.loadImage("intro2.png");
-        iMenu = ResourceManager.loadImage("menu.png");
-        iPause = ResourceManager.loadImage("pause.png");
-        iInstr = ResourceManager.loadImage("instr.png");
-        iCredits = ResourceManager.loadImage("credits.png");
-        iBoy = ResourceManager.loadImage("chooseboy.png");
-        iGirl = ResourceManager.loadImage("choosegirl.png");
-        iLevel = ResourceManager.loadImage("levelcomplete.png");
+        introCounter = 350;
+        iIntro = ResourceManager.loadImage("screen_intro.gif");
+        iMenu = ResourceManager.loadImage("screen_menu.jpg");
+        iPause = ResourceManager.loadImage("screen_instrucciones.png");
+        iInstr = ResourceManager.loadImage("screen_instrucciones.png");
+        iCredits = ResourceManager.loadImage("screen_creditos.png");
+        //iBoy = ResourceManager.loadImage("chooseboy.png");
+        //iGirl = ResourceManager.loadImage("choosegirl.png");
+        //iLevel = ResourceManager.loadImage("levelcomplete.png");
         //iLoose = ResourceManager.loadImage("youloose.png");
-        iWin = ResourceManager.loadImage("youwin.png");
-        */
+        //iWin = ResourceManager.loadImage("youwin.png");
+       
         
         introff = true;
         menuoff = false;
@@ -156,6 +172,19 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
         creditoff = false;
         pausoff = false;
         sonidoff = true;
+        
+        bIntro = true;
+        bMenu = false;
+        bInstr = false;
+        bCredits = false;
+        bBoy = true;
+        bGirl = false;
+        bLevel = false;
+        bLoose = false;
+        bWin = false;
+        bPause = false;
+        bSound = true;
+        bPlayer = false;
         
         //fileName = "scores.txt";
         //scorelist = new LinkedList<Integer>();
@@ -183,6 +212,7 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
             GameAction.DETECT_INITAL_PRESS_ONLY);
         shoot = new GameAction("shoot", GameAction.DETECT_INITAL_PRESS_ONLY);
         pause = new GameAction("pause", GameAction.DETECT_INITAL_PRESS_ONLY);
+        restart = new GameAction("restart", GameAction.DETECT_INITAL_PRESS_ONLY);
         credits = new GameAction("credits", GameAction.DETECT_INITAL_PRESS_ONLY);
         instructions = new GameAction("instructions", GameAction.DETECT_INITAL_PRESS_ONLY);
         sound = new GameAction("sound", GameAction.DETECT_INITAL_PRESS_ONLY);
@@ -198,8 +228,26 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
         inputManager.mapToKey(shoot, KeyEvent.VK_SPACE);
         inputManager.mapToKey(pause, KeyEvent.VK_P);
         inputManager.mapToKey(instructions, KeyEvent.VK_I);
+                inputManager.mapToKey(restart, KeyEvent.VK_ENTER);
         inputManager.mapToKey(credits, KeyEvent.VK_C);
         inputManager.mapToKey(sound, KeyEvent.VK_S);
+    }
+    
+        /**
+     * Reinitializes variables, in order to restart the game.
+     */
+    private void restartGame() {
+        
+        resourceManager.setCurrentMap(1);
+        map = resourceManager.reloadMap();
+        
+        lives = 3;
+        score = 0;
+        bPause = false;
+        bSound = true;
+        
+       
+        
     }
 
 
@@ -236,7 +284,7 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
                 bulletAnim = ResourceManager.bulletAnimationRight();
             }
                                    
-            if(shoot.isPressed() && !pausoff){
+            if(shoot.isPressed() &&!bPause){
                 if(player.isFiring()){
                     long elapsed = (System.nanoTime() - player.getBulletTimer())/1000000;
                     if(elapsed > player.getBulletDelay()){
@@ -254,6 +302,8 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
             
             if(pause.isPressed()){
                 pausoff = !pausoff;
+                 bPause = !bPause;
+
                 midiPlayer.setPaused(pausoff);
             }
             
@@ -261,14 +311,42 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
                     //restartGame();
                 }
             }
+        
+            if (restart.isPressed()) {
+                if (bIntro) {
+                    bMenu = true;
+                    bIntro = false;
+                }
+                else if (bMenu) {
+                    bMenu = false;
+                    //restartGame();
+                    bBoy = true;
+                    bPlayer = true;
+                }
+                else if (bBoy && bPlayer) {
+                    restartGame();
+                    //map = resourceManager.reloadMap();
+                    bPlayer=false;
+                }
+                else if (bGirl && bPlayer) {
+                    restartGame();
+                    //map = resourceManager.reloadMap();
+                    bPlayer=false;
+                }
+                else if (lives<=0) {
+                    restartGame();
+                }
+            }
+            
             
             if (instructions.isPressed()) {
-                instroff = !instroff;
+                bInstr = !bInstr;
             }
             
             if (credits.isPressed()) {
-                creditoff = !creditoff;
+                bCredits = !bCredits;
             }
+            
             
             if (sound.isPressed()) {
                 sonidoff = !sonidoff;
@@ -280,9 +358,52 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
 
 
     public void draw(Graphics2D g) {
-        renderer.draw(g, map,
-            screen.getWidth(), screen.getHeight());
-    }
+        Window window = ScreenManager.device.getFullScreenWindow();
+
+        if (bIntro && introCounter > 0){
+            g.drawImage(iIntro, 0, 0,
+                    window.getWidth(), window.getHeight(), null);
+            introCounter--;
+        }else if(bIntro){
+            bIntro=false;
+            bMenu=true;
+            //printSimpleString(g,"Presiona ENTER Para Continuar",window.getWidth(),0,400);
+        }else if (bMenu) {
+            g.drawImage(iMenu, 0, 0,
+                    window.getWidth(), window.getHeight(), null);
+        }else if (lives>0) {
+            if (!bPause){
+                
+            renderer.draw(g, map,
+                screen.getWidth(), screen.getHeight());
+
+            
+
+                
+               // g.drawString("Puntaje: " + score, 5, 60);
+               // g.drawString("Municiones: " + municiones, 5, 90);
+            } else {
+                g.drawImage(iPause, 0, 0,
+                    window.getWidth(), window.getHeight(), null);
+                }
+        }else {
+            g.drawImage(iGameOver, 0, 0,
+                    window.getWidth(), window.getHeight(), null);
+            
+        }
+        
+        if (bInstr) {
+            g.drawImage(iInstr, 0, 0,
+                    window.getWidth(), window.getHeight(), null);
+        }
+        else if (bCredits) {
+            g.drawImage(iCredits, 0, 0,
+                    window.getWidth(), window.getHeight(), null);
+     
+         }
+    }  
+         
+    
 
 
     /**

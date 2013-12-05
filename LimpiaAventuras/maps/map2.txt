@@ -1,21 +1,31 @@
-# Map file for tile-based game 
-# (Lines that start with '#' are comments)
-# The tiles are:
-#   (Space) Empty tile
-#   A..Z    Tiles A through Z
-#   o       Star
-#   !       Music Note
-#   *       Goal
-#   1       Bad Guy 1 (grub)
-#   2       Bad Guy 2 (fly)
+# Mapa para nivel 1 de LimpiaAventuras
+
+# (Lineas que empiezan con ‘#’ son comentarios)
+
+# Los cuadros son:
+
+#   (Espacio) Cuadro vacío
+
+#   A..Z    Cuadros A a la Z
+
+#   o       Pasta
+
+#   !       Shampoo
+
+#   *       Fin del nivel (jabon)
+
+#   1       Alien malo 1
+
+#   2       Alien malo 2
+
 KL          o o o                o o o o o o o o o o o o o o o o o o o o o o o                KL
-KL         KLRSTRST                                                                           KL
-KL                      o o o                KL                                       o o o o  KL
-KL                     KRSTRTL               KL                                      o o o o o KL
-KL                                           KL             o o   KRSSTRSTRSTRTSTRSL  o o o o  KL
-KL                    2   !        2                      PRSTQ  KSRTSRTSTRSTRTSRTL o o o o o KL
-KL                      PRSTQ                                    KRSTRSTRSTRSTRTSRL  KMNONML  KL
-KL         KOL                          1    1  1        2       KSRTSRTSTRSTRSTRSL o o o o o KL
-KL                            1      PRTSTSRTSRSTQ               KRSTSRTSRTSTRSRTSL  o o o o  KL
-KL      1       KMMMMNNNNMMOOMNML     o o o o o o              * KMNOMNONOMNOMNOMNL o o o o o KL
+KL         PLRSTRSQ                                                                           KL
+KL                      o o o                PQ                                       o o o o KL
+KL                     PRSTRTQ               PQ                                      o o o o oKL
+KL                                           PQ             o o                      o o o o  KL
+KL                    1   !        1                      PRSTQ                     o o o o o KL
+KL          1            PRSTQ        1                                                PRSTRSQKL
+KL         PRQ                PRTSTSRTSRSTQ         1          1 KMNOMNONOMNOMNOMNL o o o o o KL
+KL                                         1                     KMNOMNONOMNOMNOMNL  o o o o  KL
+KL      1       KMMMMNNOMNML          o o o o o o              * KMNOMNONOMNOMNOMNL o o o o o KL
 KMNOMNOMNOMNOMNOMNONMONMONMONMNOMNOMNONMONMNOMNONMONMNOMNOMNONMONMNOMNOMNOMNONMNOMNONMNOMNOMNNOL

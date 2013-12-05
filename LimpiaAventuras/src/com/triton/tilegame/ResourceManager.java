@@ -112,6 +112,9 @@ public class ResourceManager {
         return map;
     }
 
+        public void setCurrentMap(int map){
+        this.currentMap = map;
+    }
 
     public TileMap reloadMap() {
         try {
@@ -269,12 +272,24 @@ public class ResourceManager {
             loadImage("fly1.png"),
             loadImage("fly2.png"),
             loadImage("fly3.png"),
-            loadImage("sucio_01.png"),
-            loadImage("sucio_02.png"),
-            loadImage("sucio_03.png"),
+            loadImage("Enemigo-01.png"),//8
+            loadImage("Enemigo-02.png"),
+            loadImage("Enemigo-03.png"),
             loadImage("powerup1.png"),
             loadImage("powerup2.png"),
-            loadImage("powerup3.png")
+            loadImage("powerup3.png"),
+            loadImage("Enemigo-01.png"),//8
+            loadImage("Enemigo-02.png"),
+            loadImage("Enemigo-03.png"),
+            loadImage("Enemigo-04.png"),
+            loadImage("Enemigo-05.png"),//12
+            loadImage("Enemigo-06.png"),
+            loadImage("Enemigo-07.png"),
+            loadImage("Enemigo-08.png"),//15
+            loadImage("Splash1.png"),//16
+            loadImage("Splash2.png"),
+            loadImage("Splash3.png"),
+            loadImage("Splash4.png"),//19
             
         };
 

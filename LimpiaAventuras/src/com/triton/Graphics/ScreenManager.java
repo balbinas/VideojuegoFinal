@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 */
 public class ScreenManager {
 
-    private GraphicsDevice device;
+    public static GraphicsDevice device;
 
     /**
         Creates a new ScreenManager object.
