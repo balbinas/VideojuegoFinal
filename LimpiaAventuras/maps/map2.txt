@@ -1,31 +1,22 @@
 # Mapa para nivel 1 de LimpiaAventuras
-
 # (Lineas que empiezan con ‘#’ son comentarios)
-
 # Los cuadros son:
-
 #   (Espacio) Cuadro vacío
-
 #   A..Z    Cuadros A a la Z
-
 #   o       Pasta
-
 #   !       Shampoo
-
 #   *       Fin del nivel (jabon)
-
 #   1       Alien malo 1
-
 #   2       Alien malo 2
 
-KL          o o o                o o o o o o o o o o o o o o o o o o o o o o o                KL
-KL         PLRSTRSQ                                                                           KL
-KL                      o o o                PQ                                       o o o o KL
-KL                     PRSTRTQ               PQ                                      o o o o oKL
-KL                                           PQ             o o                      o o o o  KL
-KL                    1   !        1                      PRSTQ                     o o o o o KL
-KL          1            PRSTQ        1                                                PRSTRSQKL
-KL         PRQ                PRTSTSRTSRSTQ         1          1 KMNOMNONOMNOMNOMNL o o o o o KL
-KL                                         1                     KMNOMNONOMNOMNOMNL  o o o o  KL
-KL      1       KMMMMNNOMNML          o o o o o o              * KMNOMNONOMNOMNOMNL o o o o o KL
-KMNOMNOMNOMNOMNOMNONMONMONMONMNOMNOMNONMONMNOMNONMONMNOMNOMNONMONMNOMNOMNOMNONMNOMNONMNOMNOMNNOL
+KL          o o o                o o o o o o o o o o o o o o o o o o o o o o                                               PRSQ
+KL         PRSTRSQ                                                                                                       PQ   PQ
+KL                      o o o                PQ                                     o o o o                              PQ ! PQ
+KL                     PRSTRTQ               PQ                                    o o o o o                             PQ   PQ                                           !
+KL                                           PQ             o o               KNML !  o o o KONL                                                                          KOML
+KL                     1  !        1                 PRRSTSTSTSTQ          PQ KMNL o o o o oKNOL                                                                         KMOML
+KL       !            PRSTQ        1                 M   o   o  M             KMNL          KMNL                                                                       1KMNOML
+KL    PRTSRTSRTQ                    PRTSTSRTSRSTSRTSTQ       2  N     !!!     KMNL 1  !   o KMNL o o o o o KL            KNOMNOL               !  M                    KMNOOML
+KL                                          1                !  O         PQ  KMNL  o ! o   KMNL  o o o o  KL     !      KMNOMNL                  o     !            2KMNMMOML
+KL      1 1 1       KMMMMNNOMNML          o o o ! o o !   !1 2  M             KMNL ! 222 !  KMNL o o o o o KL  2  1  2   KMONMOL 1 1          N       N       222    KMNOMNOML *
+KMNOMNOMNOMNOMNOMNONMONMONMONMNOMNOMNONMONMNOMNONMONMONMNOMNOMNONMOL  M  N   KNONMONMONMNOMNOMNONMONMNOMNONMONMONMNOMNOMNONMONMNOMNONMOML   M   O   N   M  KNOMNOMNONMNOMNONMNOOL

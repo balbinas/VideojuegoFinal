@@ -1,0 +1,31 @@
+# Mapa para nivel 1 de LimpiaAventuras
+
+# (Lineas que empiezan con ‘#’ son comentarios)
+
+# Los cuadros son:
+
+#   (Espacio) Cuadro vacío
+
+#   A..Z    Cuadros A a la Z
+
+#   o       Pasta
+
+#   !       Shampoo
+
+#   *       Fin del nivel (jabon)
+
+#   1       Alien malo 1
+
+#   2       Alien malo 2
+
+KL          o o o                o o o o o o o o o o o o o o o o o o o o o o o                KL
+KL         PLRSTRSQ                                                                           KL
+KL                      o o o                PQ                                       o o o o KL
+KL                     PRSTRTQ               PQ                                      o o o o oKL
+KL                                           PQ             o o                      o o o o  KL
+KL                    1   !        1                      PRSTQ                     o o o o o KL
+KL          1            PRSTQ        1                                                PRSTRSQKL
+KL         PRQ                PRTSTSRTSRSTQ         1          1 KMNOMNONOMNOMNOMNL o o o o o KL
+KL                                         1                     KMNOMNONOMNOMNOMNL  o o o o  KL
+KL      1       KMMMMNNOMNML          o o o o o o              * KMNOMNONOMNOMNOMNL o o o o o KL
+KMNOMNOMNOMNOMNOMNONMONMONMONMNOMNOMNONMONMNOMNONMONMNOMNOMNONMONMNOMNOMNOMNONMNOMNONMNOMNOMNNOL

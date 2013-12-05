@@ -10,11 +10,11 @@
 #   2       Alien malo 2
                      
                      
-                                                            *
-    !                                                       FIG
-   FHIG           FG                 FG           o
-            FG                               FHIJHG
-                     FHG       FJIG                      FG
-              o   
-  1       ACDCDB        1    !    1         o      ACDB   o  
-ACDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDEB
+                                                            
+    !               FG                                        FIG                                *
+   FHIG      !                        FG        o                       !                      FHIJG
+             AB                  o            FHIJHG                   FHIG               FHG
+           oADCB1     FHG       FJIG                      FG                         FG    !      !
+           ACDDCB                                      !                            o         o
+  1  22   ACDCCDCB   2 2 2   1    !    1         o           1212    ACDB   o  ACB        !   2  2   1!
+ACDECDECDECDECDECDECDECDECDECDECDECDECDECDEB    AB AB AB    ACDECDECDECDECDECDECDECDECEDCECEDCEDCEDCEDDEB

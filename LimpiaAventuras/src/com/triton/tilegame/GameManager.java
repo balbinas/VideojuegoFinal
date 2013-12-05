@@ -76,6 +76,8 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
     
     public static int lives;
     public static int score;
+   public static int levels;
+
     
     public static Image iIntro;
     public static Image iIntro2;
@@ -138,14 +140,12 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
             midiPlayer.getSequence("sounds/roar.mid");
         midiPlayer.play(sequence, true);
         toggleDrumPlayback();
-        
-        lives = 3;
+      
+        lives = 1;
         score = 0;
-        
-        
-        
-        iGameOver = ResourceManager.loadImage("screen_gameover.png");
-        
+                levels=0;
+
+        iGameOver = ResourceManager.loadImage("screen_gameover_loose.png");
         introCounter = 350;
         iIntro = ResourceManager.loadImage("screen_intro.gif");
         iMenu = ResourceManager.loadImage("screen_menu.jpg");
@@ -156,7 +156,7 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
         //iGirl = ResourceManager.loadImage("choosegirl.png");
         //iLevel = ResourceManager.loadImage("levelcomplete.png");
         //iLoose = ResourceManager.loadImage("youloose.png");
-        //iWin = ResourceManager.loadImage("youwin.png");
+        iWin = ResourceManager.loadImage("screen_gameover_win.png");
        
         
         introff = true;
@@ -236,6 +236,9 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
         
         lives = 3;
         score = 0;
+                levels=0;
+                
+bWin=false;
         bPause = false;
         bSound = true;
         
@@ -375,25 +378,28 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
         }else if (bMenu) {
             g.drawImage(iMenu, 0, 0,
                     window.getWidth(), window.getHeight(), null);
-        }else if (lives>0) {
+        }else if (lives>0  && !bWin) {
             if (!bPause){
                 
             renderer.draw(g, map,
                 screen.getWidth(), screen.getHeight());
 
-            
-
-                
+        
                g.drawString("Puntaje: " + score, 5, 60);
-               // g.drawString("Municiones: " + municiones, 5, 90);
             } else {
                 g.drawImage(iPause, 0, 0,
                     window.getWidth(), window.getHeight(), null);
                 }
-        }else {
+        }else if(bWin){
+           g.drawImage(iWin, 0, 0,
+                    window.getWidth(), window.getHeight(), null);
+                        g.drawString("Tu score fue : " + score, 250,  100);
+
+        }else{
             g.drawImage(iGameOver, 0, 0,
                     window.getWidth(), window.getHeight(), null);
-            
+                                     g.drawString("Tu score fue : " + score, 250, 100);
+
         }
         
         if (bInstr) {
@@ -673,6 +679,7 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
             }
             else {
                 // player dies!
+                lives--;
                 player.setState(Creature.STATE_DYING);
             }
         }
@@ -728,6 +735,9 @@ public class GameManager extends GameCore implements Runnable, MouseListener, Mo
         //Goal
         else if (powerUp instanceof PowerUp.Goal) {
             // advance to next map
+            levels++;
+            if(levels>=2)
+                bWin = true;
             soundManager.play(prizeSound,
                 new EchoFilter(2000, .7f), false);
             map = resourceManager.loadNextMap();

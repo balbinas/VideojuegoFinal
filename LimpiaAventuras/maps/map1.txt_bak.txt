@@ -1,0 +1,20 @@
+# Mapa para nivel 1 de LimpiaAmigos
+# (Lineas que empiezan con ‘#’ son comentarios)
+# Los cuadros son:
+#   (Espacio) Cuadro vacío
+#   A..Z    Cuadros A a la Z
+#   o       Pasta
+#   !       Shampoo
+#   *       Fin del nivel (jabon)
+#   1       Alien malo 1
+#   2       Alien malo 2
+                     
+                     
+                                                            *
+    !                                                       FIG
+   FHIG           FG                 FG           o
+            FG                               FHIJHG
+                     FHG       FJIG                      FG
+              o   
+  1       ACDCDB        1    !    1         o      ACDB   o  
+ACDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDECDEB
